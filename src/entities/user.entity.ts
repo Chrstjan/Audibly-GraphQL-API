@@ -6,6 +6,7 @@ import {
   BeforeUpdate,
   BaseEntity,
 } from "typeorm";
+import { ObjectType, Field, ID } from "type-graphql";
 import bcrypt from "bcrypt";
 
 export enum UserRole {
@@ -14,6 +15,7 @@ export enum UserRole {
   USER = "user",
 }
 
+@ObjectType()
 @Entity({
   name: "user",
   orderBy: {
@@ -22,29 +24,34 @@ export enum UserRole {
   },
 })
 export class User extends BaseEntity {
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "varchar",
     nullable: false,
     unique: true,
   })
   email: string;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "varchar",
     nullable: false,
   })
   password: string;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "varchar",
     nullable: false,
     default: "-",
   })
   refresh_token: string;
 
+  @Field()
   @Column({
     type: "enum",
     enum: UserRole,
@@ -53,22 +60,25 @@ export class User extends BaseEntity {
   })
   role: UserRole;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "varchar",
     nullable: false,
     unique: true,
   })
   username: string;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "varchar",
     nullable: false,
     default: "-",
   })
   avatar: string;
 
+  @Field()
   @Column({
-    type: "string",
+    type: "text",
     nullable: false,
     default: "No description provided",
   })
