@@ -5,9 +5,15 @@ import {
   BeforeInsert,
   BeforeUpdate,
   BaseEntity,
+  OneToMany,
 } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
 import bcrypt from "bcrypt";
+import { Album } from "./album.entity.js";
+import { Audiofile } from "./audiofile.entity.js";
+import { SongImage } from "./song_image.entity.js";
+import { Song } from "./song.entity.js";
+import { SongContributor } from "./song_contributor.entity.js";
 
 export enum UserRole {
   ADMIN = "admin",
@@ -24,6 +30,7 @@ export enum UserRole {
   },
 })
 export class User extends BaseEntity {
+  // --- Basic Info ---
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
@@ -36,14 +43,12 @@ export class User extends BaseEntity {
   })
   email: string;
 
-  @Field()
   @Column({
     type: "varchar",
     nullable: false,
   })
   password: string;
 
-  @Field()
   @Column({
     type: "varchar",
     nullable: false,
@@ -104,4 +109,27 @@ export class User extends BaseEntity {
       }
     }
   }
+
+  // --- Relations ---
+  @OneToMany(() => Album, (album) => album.artist)
+  @Field(() => [Album])
+  albums: Album[];
+
+  @OneToMany(() => Audiofile, (audiofile) => audiofile.user)
+  @Field(() => [Audiofile])
+  audiofiles: Audiofile;
+
+  @OneToMany(() => SongImage, (image) => image.user)
+  @Field(() => [SongImage])
+  images: SongImage;
+
+  @OneToMany(() => Song, (song) => song.artist)
+  @Field(() => [Song])
+  songs: Song[];
+
+  @OneToMany(() => SongContributor, (contributor) => contributor.user, {
+    nullable: true,
+  })
+  @Field(() => [SongContributor], { nullable: true })
+  contributions?: [SongContributor];
 }

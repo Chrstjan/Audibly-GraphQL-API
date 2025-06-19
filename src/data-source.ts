@@ -2,6 +2,11 @@ import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import { Genre } from "./entities/genre.entity.js";
 import { User } from "./entities/user.entity.js";
+import { Album } from "./entities/album.entity.js";
+import { Audiofile } from "./entities/audiofile.entity.js";
+import { SongImage } from "./entities/song_image.entity.js";
+import { Song } from "./entities/song.entity.js";
+import { SongContributor } from "./entities/song_contributor.entity.js";
 
 dotenv.config();
 
@@ -16,5 +21,5 @@ export const AppDataSource = new DataSource({
   database: process.env.DBNAME,
   logging: true,
   synchronize: true,
-  entities: [Genre, User],
+  entities: [Genre, User, Album, Audiofile, SongImage, Song, SongContributor],
 });
