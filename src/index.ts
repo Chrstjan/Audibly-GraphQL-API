@@ -35,6 +35,7 @@ const userAuthChecker: AuthChecker<AuthCheckType> = ({ context }, roles) => {
 
 const schema = await buildSchema({
   resolvers: [AuthResolver, RoleResolver],
+  validate: true,
   authChecker: userAuthChecker,
 });
 

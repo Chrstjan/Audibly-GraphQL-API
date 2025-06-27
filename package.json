@@ -23,6 +23,7 @@
     "@apollo/server": "^4.12.2",
     "@as-integrations/express5": "^1.1.0",
     "bcrypt": "^6.0.0",
+    "class-validator": "^0.14.2",
     "cloudinary": "^2.7.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.0",

@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,7 +8,6 @@ import {
   BaseEntity,
 } from "typeorm";
 import { ObjectType, Field, ID } from "type-graphql";
-import bcrypt from "bcrypt";
 
 export enum UserRole {
   ADMIN = "admin",
