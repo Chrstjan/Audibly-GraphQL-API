@@ -15,6 +15,7 @@ export class Genre extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column({
     type: "varchar",
     nullable: false,
@@ -22,6 +23,7 @@ export class Genre extends BaseEntity {
   })
   name: string;
 
+  @Field(() => String)
   @Column({
     type: "varchar",
     nullable: false,

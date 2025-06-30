@@ -12,7 +12,7 @@ class AuthResponse {
   user: User;
 }
 
-@Resolver()
+@Resolver(() => User)
 export class AuthResolver {
   @Mutation(() => AuthResponse)
   async login(@Arg("data") data: LoginInput): Promise<AuthResponse> {

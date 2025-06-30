@@ -7,9 +7,11 @@ import { expressMiddleware } from "@as-integrations/express5";
 import { AuthChecker, buildSchema } from "type-graphql";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import { AuthCheckType } from "./lib/types/auth.js";
+import { getUserFromToken } from "./lib/utils/auth.utils.js";
 import { AuthResolver } from "./resolvers/auth.resolver.js";
 import { RoleResolver } from "./resolvers/role.resolver.js";
-import { getUserFromToken } from "./lib/utils/auth.utils.js";
+import { GenreResolver } from "./resolvers/genre.resolver.js";
+import { AlbumResolver } from "./resolvers/album.resolver.js";
 
 dotenv.config();
 
@@ -34,7 +36,7 @@ const userAuthChecker: AuthChecker<AuthCheckType> = ({ context }, roles) => {
 };
 
 const schema = await buildSchema({
-  resolvers: [AuthResolver, RoleResolver],
+  resolvers: [AuthResolver, RoleResolver, GenreResolver, AlbumResolver],
   validate: true,
   authChecker: userAuthChecker,
 });
